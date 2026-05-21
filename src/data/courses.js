@@ -1,28 +1,51 @@
 export const courses = [
   {
     id: 1,
+
     title: "Hifzul Quran Program",
+
+    slug: "hifzul-quran",
+
     duration: "3-5 Years",
+
     fee: "? 2500 / Month",
+
+    noticeFile:
+      "/notices/hifz-admission-notice.txt",
+
     description:
-      "Complete Quran memorization with Tajweed and Islamic character building.",
+      "Complete Quran memorization with Tajweed, revision system, and Islamic character development.",
+
+    features: [
+      "Qualified Huffaz Teachers",
+      "Daily Revision",
+      "Islamic Tarbiyah",
+      "Arabic Pronunciation",
+    ],
   },
 
   {
     id: 2,
-    title: "Nazera & Tajweed",
-    duration: "1-2 Years",
-    fee: "? 1500 / Month",
-    description:
-      "Proper Quran recitation with pronunciation and fluency.",
-  },
 
-  {
-    id: 3,
-    title: "Arabic Language",
-    duration: "2 Years",
-    fee: "? 2000 / Month",
+    title: "Boyosko Islamic Education",
+
+    slug: "boyosko-islamic-education",
+
+    duration: "6 Months",
+
+    fee: "? 1000 / Month",
+
+    noticeFile:
+      "/notices/boyosko-shikkha-notice.txt",
+
     description:
-      "Learn Arabic grammar, speaking, reading, and Islamic literature.",
+      "Adult Islamic education program focused on Iman, Aqidah, Salah, Fiqh, and daily Islamic lifestyle.",
+
+    features: [
+      "Iman & Aqidah",
+      "Fiqh & Salah",
+      "Daily Duas",
+      "Islamic Lifestyle",
+    ],
   },
 ];
