@@ -8,7 +8,8 @@ import { HelmetProvider } from "react-helmet-async";
 
 import { Toaster } from "react-hot-toast";
 
-import "./index.css";
+import './index.css';
+import './styles/responsive.css';
 
 import App from "./App";
 

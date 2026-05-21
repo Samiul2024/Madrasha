@@ -19,7 +19,7 @@ const FloatingButtons = () => {
 
   return (
     <div
-      className="fixed bottom-6 right-6 z-50"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
       onMouseEnter={() =>
         setOpen(true)
       }
@@ -109,7 +109,7 @@ const FloatingButtons = () => {
           }
           target="_blank"
           rel="noreferrer"
-          className="group relative bg-green-500 text-white p-5 rounded-full shadow-2xl text-2xl animate-pulse"
+          className="group relative bg-green-500 text-white p-4 sm:p-5 rounded-full shadow-2xl text-xl sm:text-2xl animate-pulse"
         >
           <FaWhatsapp />
 
