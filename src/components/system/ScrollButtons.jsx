@@ -14,7 +14,7 @@ const ScrollButtons = () => {
   useEffect(() => {
     const handleScroll = () => {
       setShow(
-        window.scrollY > 300
+        window.scrollY > 0.1
       );
     };
 

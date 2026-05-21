@@ -8,7 +8,7 @@ export const courses = [
 
     duration: "3-5 Years",
 
-    fee: "? 2500 / Month",
+    fee: " 500 / Month",
 
     noticeRoute:
       "/notices/hifz-admission",
@@ -33,9 +33,9 @@ export const courses = [
     slug:
       "boyosko-islamic-education",
 
-    duration: "6 Months",
+    duration: "12-18 Months",
 
-    fee: "? 1000 / Month",
+    fee: "100 / Month",
 
     noticeRoute:
       "/notices/boyosko-admission",
