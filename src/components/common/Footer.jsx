@@ -1,49 +1,80 @@
+import { Link } from "react-router-dom";
+
 import Container from "../ui/Container";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-950 text-white pt-20 pb-10 mt-24">
+    <footer className="bg-slate-950 text-white pt-20 pb-10">
       <Container>
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-3 gap-10">
           <div>
-            <h2 className="text-3xl font-bold text-emerald-400">
+            <h2 className="text-3xl font-black text-emerald-400">
               Darul Iman
             </h2>
 
-            <p className="mt-5 text-slate-300 leading-relaxed">
-              Modern Islamic education focused on Quran,
-              Sunnah, character, and academic excellence.
+            <p className="mt-5 text-slate-400 leading-relaxed">
+              Modern Islamic madrasa
+              focused on Quranic
+              education and character
+              development.
             </p>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-5">
+            <h3 className="text-xl font-bold">
               Quick Links
             </h3>
 
-            <div className="space-y-3 text-slate-300">
-              <p>Courses</p>
-              <p>Admission</p>
-              <p>Donation</p>
-              <p>Contact</p>
+            <div className="mt-5 flex flex-col gap-3 text-slate-400">
+              <Link to="/">
+                Home
+              </Link>
+
+              <Link to="/about">
+                About
+              </Link>
+
+              <Link to="/courses">
+                Courses
+              </Link>
+
+              <Link to="/admission">
+                Admission
+              </Link>
+
+              <Link to="/notices">
+                Notices
+              </Link>
+
+              <Link to="/contact">
+                Contact
+              </Link>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-5">
+            <h3 className="text-xl font-bold">
               Contact
             </h3>
 
-            <div className="space-y-3 text-slate-300">
-              <p>Dhaka, Bangladesh</p>
-              <p>+8801XXXXXXXXX</p>
-              <p>info@daruliman.com</p>
+            <div className="mt-5 space-y-3 text-slate-400">
+              <p>
+                Kaliganj, Bangladesh
+              </p>
+
+              <p>
+                +8801700000000
+              </p>
+
+              <p>
+                info@daruliman.com
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-14 pt-6 text-center text-slate-400">
-          © 2026 Darul Iman Islamiyah. All rights reserved.
+        <div className="mt-16 border-t border-slate-800 pt-6 text-center text-slate-500">
+          © 2026 Darul Iman Islamiyah
         </div>
       </Container>
     </footer>

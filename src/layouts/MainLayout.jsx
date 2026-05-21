@@ -6,6 +6,7 @@ import Footer from "../components/common/Footer";
 import DeveloperFooter from "../components/common/DeveloperFooter";
 
 import FloatingButtons from "../components/common/FloatingButtons";
+import ScrollButtons from "../components/system/ScrollButtons";
 
 const MainLayout = () => {
   return (
@@ -21,6 +22,8 @@ const MainLayout = () => {
       <DeveloperFooter />
 
       <FloatingButtons />
+
+      <ScrollButtons />
     </div>
   );
 };
