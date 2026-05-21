@@ -6,7 +6,7 @@ const CoursesPage = () => {
       <SEO
         title="Courses"
         description="Explore Hifzul Quran, Nazera, Arabic language, and Islamic studies courses at Darul Iman Islamiyah."
-        url="https://darulimanislamiyah.com/courses"
+        url="https://darulimanislamiyah.vercel.app/courses"
       />
 
       <div className="py-24 text-center">

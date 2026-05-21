@@ -6,7 +6,7 @@ const AboutPage = () => {
       <SEO
         title="About"
         description="Learn about Darul Iman Islamiyah madrasa, our mission, Islamic vision, and educational excellence."
-        url="https://darulimanislamiyah.com/about"
+        url="https://darulimanislamiyah.vercel.app/about"
       />
 
       <div className="py-24 text-center">
