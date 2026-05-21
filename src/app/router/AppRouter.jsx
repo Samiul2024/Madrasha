@@ -12,7 +12,10 @@ import AdmissionPage from "../../pages/public/AdmissionPage";
 import NoticesPage from "../../pages/public/NoticesPage";
 import GalleryPage from "../../pages/public/GalleryPage";
 import DonationPage from "../../pages/public/DonationPage";
-import ContactPage from "../../pages/public/ContactPage";
+import ContactPage from '../../pages/public/ContactPage';
+
+import HifzNoticePage from '../../pages/public/notices/HifzNoticePage';
+import BoyoskoNoticePage from '../../pages/public/notices/BoyoskoNoticePage';
 
 import LoginPage from "../../features/auth/pages/LoginPage";
 
@@ -37,7 +40,7 @@ const AppRouter = () => {
 
         <Route path="donation" element={<DonationPage />} />
 
-        <Route path="contact" element={<ContactPage />} />
+        <Route path="contact" element={<ContactPage />} />`n`n        <Route path="notices/hifz-admission" element={<HifzNoticePage />} />`n`n        <Route path="notices/boyosko-admission" element={<BoyoskoNoticePage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />

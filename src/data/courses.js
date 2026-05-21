@@ -8,13 +8,13 @@ export const courses = [
 
     duration: "3-5 Years",
 
-    fee: "1000 / Month",
+    fee: "? 2500 / Month",
 
-    noticeFile:
-      "/notices/hifz-admission-notice.txt",
+    noticeRoute:
+      "/notices/hifz-admission",
 
     description:
-      "Complete Quran memorization with Tajweed, revision system, and Islamic character development.",
+      "Complete Quran memorization with Tajweed and Islamic tarbiyah.",
 
     features: [
       "Qualified Huffaz Teachers",
@@ -27,19 +27,21 @@ export const courses = [
   {
     id: 2,
 
-    title: "Boyosko Islamic Education",
+    title:
+      "Boyosko Islamic Education",
 
-    slug: "boyosko-islamic-education",
+    slug:
+      "boyosko-islamic-education",
 
-    duration: "1-1.5 Years",
+    duration: "6 Months",
 
-    fee: " 100/ Month",
+    fee: "? 1000 / Month",
 
-    noticeFile:
-      "/notices/boyosko-shikkha-notice.txt",
+    noticeRoute:
+      "/notices/boyosko-admission",
 
     description:
-      "Adult Islamic education program focused on Iman, Aqidah, Salah, Fiqh, and daily Islamic lifestyle.",
+      "Islamic learning program for adults including Aqidah, Salah, Fiqh and daily Islamic lifestyle.",
 
     features: [
       "Iman & Aqidah",
