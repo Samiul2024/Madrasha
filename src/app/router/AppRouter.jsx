@@ -17,6 +17,7 @@ import ContactPage from "../../pages/public/ContactPage";
 import LoginPage from "../../features/auth/pages/LoginPage";
 
 import DashboardHome from "../../pages/dashboard/DashboardHome";
+import AdmissionsPage from "../../pages/dashboard/AdmissionsPage";
 
 const AppRouter = () => {
   return (
@@ -52,6 +53,11 @@ const AppRouter = () => {
         <Route
           index
           element={<DashboardHome />}
+        />
+
+        <Route
+          path="admissions"
+          element={<AdmissionsPage />}
         />
       </Route>
     </Routes>

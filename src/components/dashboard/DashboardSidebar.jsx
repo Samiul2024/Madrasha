@@ -7,13 +7,13 @@ const dashboardLinks = [
   },
 
   {
-    name: "Courses",
-    path: "/dashboard/courses",
+    name: "Admissions",
+    path: "/dashboard/admissions",
   },
 
   {
-    name: "Admissions",
-    path: "/dashboard/admissions",
+    name: "Courses",
+    path: "/dashboard/courses",
   },
 
   {
@@ -34,12 +34,12 @@ const dashboardLinks = [
 
 const DashboardSidebar = () => {
   return (
-    <aside className="w-72 bg-slate-950 text-white min-h-screen p-6 hidden lg:block">
+    <aside className="hidden lg:flex flex-col w-72 bg-slate-950 text-white min-h-screen p-6">
       <h2 className="text-3xl font-bold text-emerald-400">
         Darul Iman
       </h2>
 
-      <nav className="mt-10 space-y-2">
+      <nav className="mt-10 space-y-2 flex-1">
         {dashboardLinks.map((link) => (
           <NavLink
             key={link.path}
@@ -54,6 +54,10 @@ const DashboardSidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      <button className="bg-red-500 hover:bg-red-600 py-3 rounded-xl">
+        Logout
+      </button>
     </aside>
   );
 };
