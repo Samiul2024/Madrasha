@@ -7,7 +7,7 @@ import NoticeSection from "../../components/home/NoticeSection";
 import DonationSection from "../../components/home/DonationSection";
 import TestimonialSection from "../../components/home/TestimonialSection";
 import GalleryPreview from "../../components/home/GalleryPreview";
-import FloatingButtons from "../../components/home/FloatingButtons";
+
 
 const HomePage = () => {
     return (
@@ -32,7 +32,7 @@ const HomePage = () => {
 
             <TestimonialSection />
 
-            <FloatingButtons />
+            
         </>
     );
 };
