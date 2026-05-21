@@ -1,8 +1,20 @@
+import SEO from "../../seo/SEO";
+
 const AboutPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center text-4xl font-bold">
-      About Page
-    </div>
+    <>
+      <SEO
+        title="About"
+        description="Learn about Darul Iman Islamiyah madrasa, our mission, Islamic vision, and educational excellence."
+        url="https://darulimanislamiyah.com/about"
+      />
+
+      <div className="py-24 text-center">
+        <h1 className="text-5xl font-bold">
+          About Page
+        </h1>
+      </div>
+    </>
   );
 };
 
