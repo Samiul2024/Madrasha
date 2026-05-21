@@ -1,5 +1,9 @@
 import { NavLink } from "react-router-dom";
 
+import toast from "react-hot-toast";
+
+import useAuthStore from "../../store/authStore";
+
 const dashboardLinks = [
   {
     name: "Overview",
@@ -33,6 +37,17 @@ const dashboardLinks = [
 ];
 
 const DashboardSidebar = () => {
+  const logout =
+    useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+
+    toast.success(
+      "Logged out successfully"
+    );
+  };
+
   return (
     <aside className="hidden lg:flex flex-col w-72 bg-slate-950 text-white min-h-screen p-6">
       <h2 className="text-3xl font-bold text-emerald-400">
@@ -55,7 +70,10 @@ const DashboardSidebar = () => {
         ))}
       </nav>
 
-      <button className="bg-red-500 hover:bg-red-600 py-3 rounded-xl">
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
+      >
         Logout
       </button>
     </aside>

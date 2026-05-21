@@ -1,11 +1,26 @@
+import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import toast from "react-hot-toast";
+
 import FormInput from "../../../components/forms/FormInput";
+
+import useAuthStore from "../../../store/authStore";
 
 import { loginSchema } from "../../../validations/authValidation";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const login =
+    useAuthStore((state) => state.login);
+
+  const loading =
+    useAuthStore((state) => state.loading);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +29,21 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await login(data);
+
+      toast.success(
+        "Login successful"
+      );
+
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(
+        error.message ||
+          "Login failed"
+      );
+    }
   };
 
   return (
@@ -39,7 +67,7 @@ const LoginPage = () => {
             label="Email Address"
             type="email"
             name="email"
-            placeholder="admin@example.com"
+            placeholder="admin@daruliman.com"
             register={register}
             error={errors.email}
           />
@@ -48,18 +76,35 @@ const LoginPage = () => {
             label="Password"
             type="password"
             name="password"
-            placeholder="Enter password"
+            placeholder="123456"
             register={register}
             error={errors.password}
           />
 
           <button
             type="submit"
-            className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-xl font-semibold transition"
+            disabled={loading}
+            className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:opacity-70 text-white py-3 rounded-xl font-semibold transition"
           >
-            Login
+            {loading
+              ? "Logging in..."
+              : "Login"}
           </button>
         </form>
+
+        <div className="mt-6 bg-slate-50 rounded-2xl p-4 text-sm text-slate-600">
+          <p>
+            Demo Credentials:
+          </p>
+
+          <p className="mt-2">
+            admin@daruliman.com
+          </p>
+
+          <p>
+            123456
+          </p>
+        </div>
       </div>
     </section>
   );
