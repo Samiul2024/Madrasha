@@ -59,7 +59,7 @@ const Footer = () => {
 
             <div className="mt-5 space-y-3 text-slate-400">
               <p>
-                Kaliganj, Bangladesh
+                Khulna, Bangladesh
               </p>
 
               <p>
@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 border-t border-slate-800 pt-6 text-center text-slate-500">
-          © 2026 Darul Iman Islamiyah
+          ï¿½ 2026 Darul Iman Islamiyah
         </div>
       </Container>
     </footer>
