@@ -1,79 +1,144 @@
-import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  BookOpen,
+  FileText,
+  GraduationCap,
+  Image,
+  LogOut,
+} from "lucide-react";
 
-import toast from "react-hot-toast";
+import {
+  NavLink,
+} from "react-router-dom";
 
-import useAuthStore from "../../store/authStore";
+import useAuthStore from "../../features/auth/authStore";
 
-const dashboardLinks = [
+const links = [
   {
-    name: "Overview",
+    title: "Dashboard",
     path: "/dashboard",
+    icon: LayoutDashboard,
   },
 
   {
-    name: "Admissions",
-    path: "/dashboard/admissions",
+    title: "Courses",
+    path:
+      "/dashboard/courses",
+    icon: BookOpen,
   },
 
   {
-    name: "Courses",
-    path: "/dashboard/courses",
+    title: "Notices",
+    path:
+      "/dashboard/notices",
+    icon: FileText,
   },
 
   {
-    name: "Notices",
-    path: "/dashboard/notices",
+    title: "Admissions",
+    path:
+      "/dashboard/admissions",
+    icon: GraduationCap,
   },
 
   {
-    name: "Gallery",
-    path: "/dashboard/gallery",
-  },
-
-  {
-    name: "Donations",
-    path: "/dashboard/donations",
+    title: "Gallery",
+    path:
+      "/dashboard/gallery",
+    icon: Image,
   },
 ];
 
 const DashboardSidebar = () => {
   const logout =
-    useAuthStore((state) => state.logout);
-
-  const handleLogout = () => {
-    logout();
-
-    toast.success(
-      "Logged out successfully"
+    useAuthStore(
+      (state) => state.logout
     );
-  };
 
   return (
-    <aside className="hidden lg:flex flex-col w-72 bg-slate-950 text-white min-h-screen p-6">
-      <h2 className="text-3xl font-bold text-emerald-400">
-        Darul Iman
-      </h2>
+    <aside
+      className="
+        w-72
+        min-h-screen
+        bg-emerald-950
+        text-white
+        p-6
+        hidden
+        lg:flex
+        flex-col
+      "
+    >
+      <div className="mb-10">
+        <h2
+          className="
+            text-2xl
+            font-bold
+          "
+        >
+          Darul Iman
+        </h2>
 
-      <nav className="mt-10 space-y-2 flex-1">
-        {dashboardLinks.map((link) => (
-          <NavLink
-            key={link.path}
-            to={link.path}
-            className={({ isActive }) =>
-              isActive
-                ? "block bg-emerald-700 px-5 py-3 rounded-xl"
-                : "block hover:bg-slate-800 px-5 py-3 rounded-xl transition"
-            }
-          >
-            {link.name}
-          </NavLink>
-        ))}
+        <p
+          className="
+            text-sm
+            text-emerald-200
+          "
+        >
+          Admin Dashboard
+        </p>
+      </div>
+
+      <nav
+        className="
+          flex
+          flex-col
+          gap-3
+        "
+      >
+        {links.map((link) => {
+          const Icon =
+            link.icon;
+
+          return (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className="
+                flex
+                items-center
+                gap-3
+                px-4
+                py-3
+                rounded-xl
+                hover:bg-emerald-800
+                transition
+              "
+            >
+              <Icon size={20} />
+
+              {link.title}
+            </NavLink>
+          );
+        })}
       </nav>
 
       <button
-        onClick={handleLogout}
-        className="bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
+        onClick={logout}
+        className="
+          mt-auto
+          flex
+          items-center
+          gap-3
+          px-4
+          py-3
+          rounded-xl
+          bg-red-500
+          hover:bg-red-600
+          transition
+        "
       >
+        <LogOut size={20} />
+
         Logout
       </button>
     </aside>
