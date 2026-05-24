@@ -25,6 +25,7 @@ import ContactPage from "../../pages/public/ContactPage";
 ========================= */
 import AdminLoginPage from "../../features/dashboard/pages/AdminLoginPage";
 import DashboardHomePage from "../../features/dashboard/pages/DashboardHomePage";
+import CourseManagementPage from "../../features/dashboard/pages/courses/CourseManagementPage";
 
 const AppRouter = () => {
   return (
@@ -64,7 +65,7 @@ const AppRouter = () => {
         }
       >
         {/* DASHBOARD HOME */}
-        <Route index element={<DashboardHomePage />} />
+        <Route index element={<DashboardHomePage />} />`n        <Route path="courses" element={<CourseManagementPage />} />
 
         {/* ADD MORE DASHBOARD ROUTES HERE */}
 
