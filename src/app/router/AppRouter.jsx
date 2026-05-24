@@ -25,7 +25,9 @@ import ContactPage from "../../pages/public/ContactPage";
 ========================= */
 import AdminLoginPage from "../../features/dashboard/pages/AdminLoginPage";
 import DashboardHomePage from "../../features/dashboard/pages/DashboardHomePage";
-import CourseManagementPage from "../../features/dashboard/pages/courses/CourseManagementPage"; import NoticeManagementPage from "../../features/dashboard/pages/notices/NoticeManagementPage";
+import CourseManagementPage from "../../features/dashboard/pages/courses/CourseManagementPage"; import NoticeManagementPage from "../../features/dashboard/pages/notices/NoticeManagementPage"; import CreateCoursePage from "../../features/dashboard/pages/courses/CreateCoursePage";
+import EditCoursePage from "../../features/dashboard/pages/courses/EditCoursePage";
+import NoticeDetailsPage from "../../pages/public/NoticeDetailsPage";
 
 const AppRouter = () => {
   return (
@@ -65,7 +67,11 @@ const AppRouter = () => {
         }
       >
         {/* DASHBOARD HOME */}
-        <Route index element={<DashboardHomePage />} />`n        <Route path="courses" element={<CourseManagementPage />} />`n        <Route path="notices" element={<NoticeManagementPage />} />
+        <Route index element={<DashboardHomePage />} />
+        <Route path="courses" element={<CourseManagementPage />} />
+        <Route path="courses/create" element={<CreateCoursePage />} />
+        <Route path="courses/edit/:id" element={<EditCoursePage />} />
+        <Route path="notices" element={<NoticeManagementPage />} />
 
         {/* ADD MORE DASHBOARD ROUTES HERE */}
 
