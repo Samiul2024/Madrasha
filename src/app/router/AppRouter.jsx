@@ -25,7 +25,7 @@ import ContactPage from "../../pages/public/ContactPage";
 ========================= */
 import AdminLoginPage from "../../features/dashboard/pages/AdminLoginPage";
 import DashboardHomePage from "../../features/dashboard/pages/DashboardHomePage";
-import CourseManagementPage from "../../features/dashboard/pages/courses/CourseManagementPage"; import NoticeManagementPage from "../../features/dashboard/pages/notices/NoticeManagementPage"; import CreateCoursePage from "../../features/dashboard/pages/courses/CreateCoursePage";
+import CourseManagementPage from "../../features/dashboard/pages/courses/CourseManagementPage"; import NoticeManagementPage from "../../features/dashboard/pages/notices/NoticeManagementPage"; import GalleryManagementPage from "../../features/dashboard/pages/gallery/GalleryManagementPage"; import CreateCoursePage from "../../features/dashboard/pages/courses/CreateCoursePage";
 import EditCoursePage from "../../features/dashboard/pages/courses/EditCoursePage";
 import NoticeDetailsPage from "../../pages/public/NoticeDetailsPage";
 
@@ -72,6 +72,7 @@ const AppRouter = () => {
         <Route path="courses/create" element={<CreateCoursePage />} />
         <Route path="courses/edit/:id" element={<EditCoursePage />} />
         <Route path="notices" element={<NoticeManagementPage />} />
+        <Route path="gallery" element={<GalleryManagementPage />} />
 
         {/* ADD MORE DASHBOARD ROUTES HERE */}
 
