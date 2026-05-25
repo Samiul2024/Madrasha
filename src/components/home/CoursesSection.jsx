@@ -1,31 +1,67 @@
 import Container from "../ui/Container";
+
 import SectionHeading from "../shared/SectionHeading";
 
 import CourseCard from "../cards/CourseCard";
 
-import { courses } from "../../data/courses";
+const CoursesSection = ({
+    courses = [],
+}) => {
 
-const CoursesSection = () => {
-  return (
-    <section className="py-24 bg-slate-50">
-      <Container>
-        <SectionHeading
-          subtitle="Academic Programs"
-          title="Featured Islamic Courses"
-          description="Comprehensive Islamic and modern education programs for students."
-        />
+    return (
+        <section
+            className="
+                py-24
+                bg-slate-50
+            "
+        >
+            <Container>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-            />
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
+                <SectionHeading
+                    subtitle="Academic Programs"
+                    title="Featured Islamic Courses"
+                    description="Comprehensive Islamic and modern education programs for students."
+                />
+
+                {
+                    courses.length === 0 ? (
+                        <div
+                            className="
+                                text-center
+                                text-slate-500
+                                py-10
+                            "
+                        >
+                            No courses found.
+                        </div>
+                    ) : (
+                        <div
+                            className="
+                                grid
+                                md:grid-cols-2
+                                lg:grid-cols-3
+                                gap-8
+                            "
+                        >
+                            {courses.map(
+                                (course) => (
+                                    <CourseCard
+                                        key={
+                                            course._id
+                                        }
+                                        course={
+                                            course
+                                        }
+                                    />
+                                )
+                            )}
+                        </div>
+                    )
+                }
+
+            </Container>
+        </section>
+    );
 };
 
 export default CoursesSection;

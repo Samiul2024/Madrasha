@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+
+import toast from "react-hot-toast";
+
 import SEO from "../../seo/SEO";
 
 import HeroSection from "../../components/home/HeroSection";
@@ -8,8 +12,89 @@ import DonationSection from "../../components/home/DonationSection";
 import TestimonialSection from "../../components/home/TestimonialSection";
 import GalleryPreview from "../../components/home/GalleryPreview";
 
+import {
+    getCourses,
+} from "../../services/course/courseService";
+
+import {
+    getNotices,
+} from "../../services/notice/noticeService";
 
 const HomePage = () => {
+
+    const [courses, setCourses] =
+        useState([]);
+
+    const [notices, setNotices] =
+        useState([]);
+
+    const [loading, setLoading] =
+        useState(true);
+
+    useEffect(() => {
+
+        const fetchHomeData =
+            async () => {
+
+                try {
+
+                    const [
+                        courseData,
+                        noticeData,
+                    ] = await Promise.all([
+                        getCourses(),
+                        getNotices(),
+                    ]);
+
+                    setCourses(
+                        courseData.slice(
+                            0,
+                            3
+                        )
+                    );
+
+                    setNotices(
+                        noticeData.slice(
+                            0,
+                            4
+                        )
+                    );
+
+                } catch (error) {
+
+                    toast.error(
+                        "Failed to load homepage"
+                    );
+
+                } finally {
+
+                    setLoading(false);
+
+                }
+            };
+
+        fetchHomeData();
+
+    }, []);
+
+    if (loading) {
+
+        return (
+            <div
+                className="
+                    min-h-screen
+                    flex
+                    items-center
+                    justify-center
+                "
+            >
+                <p>
+                    Loading...
+                </p>
+            </div>
+        );
+    }
+
     return (
         <>
             <SEO
@@ -22,17 +107,19 @@ const HomePage = () => {
 
             <AboutSection />
 
-            <CoursesSection />
+            <CoursesSection
+                courses={courses}
+            />
 
-            <NoticeSection />
+            <NoticeSection
+                notices={notices}
+            />
 
             <GalleryPreview />
 
             <DonationSection />
 
             <TestimonialSection />
-
-            
         </>
     );
 };
