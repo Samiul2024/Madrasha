@@ -22,34 +22,31 @@ const links = [
 
   {
     title: "Courses",
-    path:
-      "/dashboard/courses",
+    path: "/dashboard/courses",
     icon: BookOpen,
   },
 
   {
     title: "Notices",
-    path:
-      "/dashboard/notices",
+    path: "/dashboard/notices",
     icon: FileText,
   },
 
   {
     title: "Admissions",
-    path:
-      "/dashboard/admissions",
+    path: "/dashboard/admissions",
     icon: GraduationCap,
   },
 
   {
     title: "Gallery",
-    path:
-      "/dashboard/gallery",
+    path: "/dashboard/gallery",
     icon: Image,
   },
 ];
 
 const DashboardSidebar = () => {
+
   const logout =
     useAuthStore(
       (state) => state.logout
@@ -58,20 +55,22 @@ const DashboardSidebar = () => {
   return (
     <aside
       className="
+        hidden
+        lg:flex
         w-72
         min-h-screen
         bg-emerald-950
         text-white
         p-6
-        hidden
-        lg:flex
         flex-col
+        sticky
+        top-0
       "
     >
       <div className="mb-10">
         <h2
           className="
-            text-2xl
+            text-3xl
             font-bold
           "
         >
@@ -96,6 +95,7 @@ const DashboardSidebar = () => {
         "
       >
         {links.map((link) => {
+
           const Icon =
             link.icon;
 
@@ -103,16 +103,24 @@ const DashboardSidebar = () => {
             <NavLink
               key={link.path}
               to={link.path}
-              className="
-                flex
-                items-center
-                gap-3
-                px-4
-                py-3
-                rounded-xl
-                hover:bg-emerald-800
-                transition
-              "
+              className={({
+                isActive,
+              }) =>
+                `
+                  flex
+                  items-center
+                  gap-3
+                  px-4
+                  py-3
+                  rounded-xl
+                  transition
+                  ${
+                    isActive
+                      ? "bg-emerald-700"
+                      : "hover:bg-emerald-800"
+                  }
+                `
+              }
             >
               <Icon size={20} />
 
