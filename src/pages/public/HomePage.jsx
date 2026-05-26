@@ -100,7 +100,7 @@ const HomePage = () => {
             <SEO
                 title="Home"
                 description="Darul Iman Islamiyah is a modern Islamic madrasa in Bangladesh offering Hifz, Nazera, Arabic language, and Islamic education."
-                url="https://darulimanislamiyah.com"
+                url="https://darulimanislamiyah.vercel.app"
             />
 
             <HeroSection />
