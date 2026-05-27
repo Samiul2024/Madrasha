@@ -144,6 +144,20 @@ const Navbar = () => {
           >
             Admission
           </a>
+          <a
+            href="/dashboard"
+            className="
+              block 
+              text-center
+              bg-emerald-700
+              text-white
+              py-3
+              rounded-xl
+              font-semibold
+            "
+          >
+            Dashboard
+          </a>
         </div>
       )}
     </header>
