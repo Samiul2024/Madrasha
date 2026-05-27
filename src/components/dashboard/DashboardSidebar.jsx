@@ -139,6 +139,7 @@ const DashboardSidebar = () => {
           gap-3
           px-4
           py-3
+          p-6 mb-10
           rounded-xl
           bg-red-500
           hover:bg-red-600
@@ -149,6 +150,7 @@ const DashboardSidebar = () => {
 
         Logout
       </button>
+      
     </aside>
   );
 };

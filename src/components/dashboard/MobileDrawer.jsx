@@ -198,6 +198,7 @@ const MobileDrawer = ({
             transition
             px-4
             py-3
+            mb-10
             rounded-xl
             flex
             items-center
