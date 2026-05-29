@@ -7,9 +7,12 @@ import toast from "react-hot-toast";
 
 import apiClient from "../../../../services/api/apiClient";
 
-import DashboardTableSkeleton from "../../../../components/ui/skeletons/DashboardTableSkeleton";`r`n`r`nconst NoticeManagementPage =
+import DashboardTableSkeleton from "../../../../components/ui/skeletons/DashboardTableSkeleton";
+
+const NoticeManagementPage =
   () => {
-    const [notices, setNotices] = useState([]);`r`n`r`nconst [loading, setLoading] = useState(true);
+    const [notices, setNotices] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [formData, setFormData] =
       useState({
@@ -31,11 +34,13 @@ import DashboardTableSkeleton from "../../../../components/ui/skeletons/Dashboar
             data.notices
           );
         } catch {
-          toast.error("Failed to load notices");`r`n} finally {`r`nsetLoading(false);`r`n}
+          toast.error("Failed to load notices"); 
+        } finally { setLoading(false);  }
       };
 
     useEffect(() => {
-      fetchNotices();`r`n}, []);
+      fetchNotices(); 
+    }, []);
 
     const handleChange = (e) => {
       setFormData({
@@ -94,7 +99,7 @@ import DashboardTableSkeleton from "../../../../components/ui/skeletons/Dashboar
         }
       };
 
-    if (loading) {`r`nreturn <DashboardTableSkeleton />;`r`n}`r`n`r`nreturn (
+    if (loading) { return < DashboardTableSkeleton />;  } return(
       <div>
         <h1
           className="
