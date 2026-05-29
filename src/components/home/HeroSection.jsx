@@ -58,7 +58,7 @@ const HeroSection = () => {
                 backdrop-blur-md
               "
             >
-              Islamic Education • Modern Learning
+              Islamic Education  
             </span>
 
             <h1

@@ -5,7 +5,7 @@ import {
 
 import apiClient from "../../../../services/api/apiClient";
 
-import toast from "react-hot-toast";
+import toast from "react-hot-toast";`r`nimport DashboardTableSkeleton from "../../../../components/ui/skeletons/DashboardTableSkeleton";
 
 import {
   FaPlus,

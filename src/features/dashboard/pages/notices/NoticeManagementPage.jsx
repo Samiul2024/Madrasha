@@ -7,10 +7,9 @@ import toast from "react-hot-toast";
 
 import apiClient from "../../../../services/api/apiClient";
 
-const NoticeManagementPage =
+import DashboardTableSkeleton from "../../../../components/ui/skeletons/DashboardTableSkeleton";`r`n`r`nconst NoticeManagementPage =
   () => {
-    const [notices, setNotices] =
-      useState([]);
+    const [notices, setNotices] = useState([]);`r`n`r`nconst [loading, setLoading] = useState(true);
 
     const [formData, setFormData] =
       useState({
@@ -32,15 +31,11 @@ const NoticeManagementPage =
             data.notices
           );
         } catch {
-          toast.error(
-            "Failed to load notices"
-          );
-        }
+          toast.error("Failed to load notices");`r`n} finally {`r`nsetLoading(false);`r`n}
       };
 
     useEffect(() => {
-      fetchNotices();
-    }, []);
+      fetchNotices();`r`n}, []);
 
     const handleChange = (e) => {
       setFormData({
@@ -99,7 +94,7 @@ const NoticeManagementPage =
         }
       };
 
-    return (
+    if (loading) {`r`nreturn <DashboardTableSkeleton />;`r`n}`r`n`r`nreturn (
       <div>
         <h1
           className="
@@ -287,3 +282,4 @@ const NoticeManagementPage =
   };
 
 export default NoticeManagementPage;
+

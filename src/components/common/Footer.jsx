@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 border-t border-slate-800 pt-6 text-center text-slate-500">
-          � 2026 Darul Iman Islamiyah
+           2026 Darul Iman Islamiyah
         </div>
       </Container>
     </footer>

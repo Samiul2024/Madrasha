@@ -10,7 +10,7 @@ import CoursesSection from "../../components/home/CoursesSection";
 import NoticeSection from "../../components/home/NoticeSection";
 import DonationSection from "../../components/home/DonationSection";
 import TestimonialSection from "../../components/home/TestimonialSection";
-import GalleryPreview from "../../components/home/GalleryPreview";
+import GalleryPreview from "../../components/home/GalleryPreview";`r`nimport PageLoader from "../../components/ui/skeletons/PageLoader";
 
 import {
     getCourses,
@@ -88,9 +88,7 @@ const HomePage = () => {
                     justify-center
                 "
             >
-                <p>
-                    Loading...
-                </p>
+                <PageLoader />
             </div>
         );
     }
