@@ -6,7 +6,6 @@ import {
 import apiClient from "../../../../services/api/apiClient";
 
 import toast from "react-hot-toast";
-import DashboardTableSkeleton from "../../../../components/ui/skeletons/DashboardTableSkeleton";
 
 import {
   FaPlus,
@@ -14,6 +13,8 @@ import {
   FaTrash,
   FaTimes,
 } from "react-icons/fa";
+
+import DeleteConfirmModal from "../../../../components/ui/DeleteConfirmModal";
 
 const initialForm = {
   title: "",
@@ -23,188 +24,205 @@ const initialForm = {
   description: "",
 };
 
-const CourseManagementPage =
-  () => {
-    const [courses, setCourses] =
-      useState([]);
+const CourseManagementPage = () => {
+  const [courses, setCourses] =
+    useState([]);
 
-    const [loading, setLoading] =
-      useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
-    const [isModalOpen, setIsModalOpen] =
-      useState(false);
+  const [deleteId, setDeleteId] =
+    useState(null);
 
-    const [editingCourse, setEditingCourse] =
-      useState(null);
+  const [deleteLoading, setDeleteLoading] =
+    useState(false);
 
-    const [formData, setFormData] =
-      useState(initialForm);
+  const [isModalOpen, setIsModalOpen] =
+    useState(false);
 
-    const fetchCourses =
-      async () => {
-        try {
-          const { data } =
-            await apiClient.get(
-              "/courses"
-            );
+  const [editingCourse, setEditingCourse] =
+    useState(null);
 
-          setCourses(
-            data.courses
+  const [formData, setFormData] =
+    useState(initialForm);
+
+  const fetchCourses =
+    async () => {
+      try {
+        setLoading(true);
+
+        const { data } =
+          await apiClient.get(
+            "/courses"
           );
-        } catch {
-          toast.error(
-            "Failed to load courses"
-          );
-        } finally {
-          setLoading(false);
-        }
-      };
 
-    useEffect(() => {
-      fetchCourses();
-    }, []);
-
-    const handleChange = (e) => {
-      setFormData({
-        ...formData,
-
-        [e.target.name]:
-          e.target.value,
-      });
+        setCourses(
+          data.courses || []
+        );
+      } catch {
+        toast.error(
+          "Failed to load courses"
+        );
+      } finally {
+        setLoading(false);
+      }
     };
 
-    const openCreateModal =
-      () => {
-        setEditingCourse(null);
+  useEffect(() => {
+    fetchCourses();
 
-        setFormData(initialForm);
+    setDeleteId(null);
+  }, []);
 
-        setIsModalOpen(true);
-      };
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
 
-    const openEditModal =
-      (course) => {
-        setEditingCourse(course);
+      [e.target.name]:
+        e.target.value,
+    });
+  };
 
-        setFormData({
-          title:
-            course.title || "",
+  const openCreateModal =
+    () => {
+      setEditingCourse(null);
 
-          slug:
-            course.slug || "",
+      setFormData(
+        initialForm
+      );
 
-          duration:
-            course.duration || "",
+      setIsModalOpen(true);
+    };
 
-          fee:
-            course.fee || "",
+  const openEditModal =
+    (course) => {
+      setEditingCourse(course);
 
-          description:
-            course.description ||
-            "",
-        });
+      setFormData({
+        title:
+          course.title || "",
 
-        setIsModalOpen(true);
-      };
+        slug:
+          course.slug || "",
 
-    const closeModal =
-      () => {
-        setIsModalOpen(false);
+        duration:
+          course.duration || "",
 
-        setEditingCourse(null);
+        fee:
+          course.fee || "",
 
-        setFormData(initialForm);
-      };
+        description:
+          course.description ||
+          "",
+      });
 
-    const handleSubmit =
-      async (e) => {
-        e.preventDefault();
+      setIsModalOpen(true);
+    };
 
-        try {
-          if (
-            editingCourse
-          ) {
-            await apiClient.put(
-              `/courses/${editingCourse._id}`,
-              formData
-            );
+  const closeModal =
+    () => {
+      setIsModalOpen(false);
 
-            toast.success(
-              "Course updated"
-            );
-          } else {
-            await apiClient.post(
-              "/courses",
-              formData
-            );
+      setEditingCourse(null);
 
-            toast.success(
-              "Course created"
-            );
-          }
+      setFormData(
+        initialForm
+      );
+    };
 
-          closeModal();
+  const handleSubmit =
+    async (e) => {
+      e.preventDefault();
 
-          fetchCourses();
-        } catch {
-          toast.error(
-            "Operation failed"
-          );
-        }
-      };
+      setDeleteLoading(true);
 
-    const handleDelete =
-      async (id) => {
-        const confirmDelete =
-          window.confirm(
-            "Delete this course?"
-          );
-
+      try {
         if (
-          !confirmDelete
+          editingCourse
         ) {
-          return;
-        }
-
-        try {
-          await apiClient.delete(
-            `/courses/${id}`
+          await apiClient.put(
+            `/courses/${editingCourse._id}`,
+            formData
           );
 
           toast.success(
-            "Course deleted"
+            "Course updated"
+          );
+        } else {
+          await apiClient.post(
+            "/courses",
+            formData
           );
 
-          fetchCourses();
-        } catch {
-          toast.error(
-            "Delete failed"
+          toast.success(
+            "Course created"
           );
         }
-      };
 
-    if (loading) {
-      return (
-        <div
+        closeModal();
+
+        fetchCourses();
+
+        setDeleteId(null);
+      } catch {
+        toast.error(
+          "Operation failed"
+        );
+      } finally {
+        setDeleteLoading(false);
+      }
+    };
+
+  const handleDelete =
+    async (id) => {
+      if (!id) return;
+
+      setDeleteLoading(true);
+
+      try {
+        await apiClient.delete(
+          `/courses/${id}`
+        );
+
+        toast.success(
+          "Course deleted"
+        );
+
+        fetchCourses();
+
+        setDeleteId(null);
+      } catch {
+        toast.error(
+          "Delete failed"
+        );
+      } finally {
+        setDeleteLoading(false);
+      }
+    };
+
+  if (loading) {
+    return (
+      <div
+        className="
+          flex
+          items-center
+          justify-center
+          h-[300px]
+        "
+      >
+        <p
           className="
-            flex
-            items-center
-            justify-center
-            h-[300px]
+            text-slate-500
           "
         >
-          <p
-            className="
-              text-slate-500
-            "
-          >
-            Loading courses...
-          </p>
-        </div>
-      );
-    }
+          Loading courses...
+        </p>
+      </div>
+    );
+  }
 
-    return (
+  return (
+    <>
       <div>
         {/* HEADER */}
 
@@ -347,6 +365,7 @@ const CourseManagementPage =
                     className="
                       flex-1
                       bg-blue-500
+                      hover:bg-blue-600
                       text-white
                       py-2
                       rounded-xl
@@ -357,13 +376,14 @@ const CourseManagementPage =
 
                   <button
                     onClick={() =>
-                      handleDelete(
+                      setDeleteId(
                         course._id
                       )
                     }
                     className="
                       flex-1
                       bg-red-500
+                      hover:bg-red-600
                       text-white
                       py-2
                       rounded-xl
@@ -500,7 +520,7 @@ const CourseManagementPage =
 
                         <button
                           onClick={() =>
-                            handleDelete(
+                            setDeleteId(
                               course._id
                             )
                           }
@@ -607,6 +627,7 @@ const CourseManagementPage =
                     rounded-xl
                     p-3
                   "
+                  required
                 />
 
                 <input
@@ -624,6 +645,7 @@ const CourseManagementPage =
                     rounded-xl
                     p-3
                   "
+                  required
                 />
 
                 <input
@@ -641,6 +663,7 @@ const CourseManagementPage =
                     rounded-xl
                     p-3
                   "
+                  required
                 />
 
                 <input
@@ -658,6 +681,7 @@ const CourseManagementPage =
                     rounded-xl
                     p-3
                   "
+                  required
                 />
 
                 <textarea
@@ -678,9 +702,14 @@ const CourseManagementPage =
                 />
 
                 <button
+                  type="submit"
+                  disabled={
+                    deleteLoading
+                  }
                   className="
                     bg-emerald-600
                     hover:bg-emerald-700
+                    disabled:opacity-50
                     text-white
                     py-3
                     rounded-xl
@@ -696,7 +725,25 @@ const CourseManagementPage =
           </div>
         )}
       </div>
-    );
-  };
+
+      <DeleteConfirmModal
+        open={!!deleteId}
+        onClose={() =>
+          setDeleteId(null)
+        }
+        onConfirm={() =>
+          handleDelete(
+            deleteId
+          )
+        }
+        loading={
+          deleteLoading
+        }
+        title="Delete Course"
+        message="This course will be permanently deleted."
+      />
+    </>
+  );
+};
 
 export default CourseManagementPage;
