@@ -48,21 +48,28 @@ const AppRouter = () => {
         {/* OTHER PUBLIC PAGES */}
         <Route path="about" element={<AboutPage />} />
         <Route path="courses" element={<CoursesPage />} />
-        <Route path="admission" element={<AdmissionPage />} />
-        <Route path="notices" element={<NoticesPage />} />
-        <Route path="gallery" element={<GalleryPage />} />
-        <Route path="donation" element={<DonationPage />} />
-        <Route path="contact" element={<ContactPage />} />
 
         <Route
           path="courses/:id"
           element={<CourseDetailsPage />}
         />
 
+        <Route path="admission" element={<AdmissionPage />} />
+        <Route path="notices" element={<NoticesPage />} />
+
+
         <Route
           path="notices/:slug"
           element={<NoticeDetailsPage />}
         />
+
+
+        <Route path="gallery" element={<GalleryPage />} />
+        <Route path="donation" element={<DonationPage />} />
+        <Route path="contact" element={<ContactPage />} />
+
+
+
 
       </Route>
 
