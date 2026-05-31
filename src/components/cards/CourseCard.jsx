@@ -58,7 +58,7 @@ const CourseCard = ({
 
       <div className="mt-8 flex flex-col gap-3">
         <a
-          href="/notices"
+          href={course.noticeRoute || "/notices"}
           target="_blank"
           rel="noreferrer"
           className="bg-slate-900 hover:bg-black text-white py-3 rounded-xl text-center font-semibold transition"
@@ -67,7 +67,7 @@ const CourseCard = ({
         </a>
 
         <a
-          href="/admission"
+          href={`/courses/${course._id}`}
           className="bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-xl text-center font-semibold transition"
         >
           Apply Now

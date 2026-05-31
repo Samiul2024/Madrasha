@@ -5,106 +5,195 @@ import {
 
 import {
   useParams,
+  Link,
 } from "react-router-dom";
 
-import apiClient from "../../services/api/apiClient";
+import toast from "react-hot-toast";
 
-const NoticeDetailsPage =
-  () => {
-    const { slug } =
-      useParams();
+import Container from "../../components/ui/Container";
 
-    const [notice, setNotice] =
-      useState(null);
+import {
+  getSingleNotice,
+} from "../../services/notice/noticeService";
 
-    useEffect(() => {
-      const fetchNotice =
-        async () => {
-          const { data } =
-            await apiClient.get(
-              `/notices/${slug}`
+const NoticeDetailsPage = () => {
+
+  const { slug } =
+    useParams();
+
+  const [notice,setNotice] =
+    useState(null);
+
+  const [loading,setLoading] =
+    useState(true);
+
+  useEffect(() => {
+
+    const fetchNotice =
+      async () => {
+
+        try {
+
+          const data =
+            await getSingleNotice(
+              slug
             );
 
-          setNotice(
-            data.notice
+          setNotice(data);
+
+        } catch {
+
+          toast.error(
+            "Notice not found"
           );
-        };
 
-      fetchNotice();
-    }, [slug]);
+        } finally {
 
-    if (!notice) {
-      return (
-        <p className="p-10">
-          Loading...
-        </p>
-      );
-    }
+          setLoading(false);
+
+        }
+      };
+
+    fetchNotice();
+
+  }, [slug]);
+
+  if (loading) {
 
     return (
-      <section
+      <div
         className="
           min-h-screen
-          bg-slate-100
-          py-10
-          px-4
+          flex
+          items-center
+          justify-center
         "
       >
+        Loading...
+      </div>
+    );
+  }
+
+  if (!notice) {
+
+    return (
+      <div
+        className="
+          min-h-screen
+          flex
+          items-center
+          justify-center
+        "
+      >
+        Notice Not Found
+      </div>
+    );
+  }
+
+  return (
+    <main
+      className="
+        py-16
+        md:py-24
+      "
+    >
+
+      <Container>
+
         <div
           className="
             max-w-4xl
             mx-auto
             bg-white
-            shadow-2xl
-            rounded-2xl
-            p-10
+            rounded-3xl
+            shadow-xl
+            overflow-hidden
           "
         >
+
           <div
             className="
-              border-b
-              pb-6
-              mb-6
+              bg-slate-900
+              text-white
+              p-8
+              md:p-12
             "
           >
+
+            <span
+              className="
+                bg-emerald-600
+                px-4
+                py-2
+                rounded-full
+                text-sm
+              "
+            >
+              {notice.category}
+            </span>
+
             <h1
               className="
                 text-4xl
                 font-bold
-                mb-2
+                mt-5
               "
             >
-              {
-                notice.title
-              }
+              {notice.title}
             </h1>
 
-            <p
-              className="
-                text-slate-500
-              "
-            >
-              Category:
-              {
-                notice.category
-              }
-            </p>
           </div>
 
           <div
             className="
-              whitespace-pre-wrap
-              leading-8
-              text-lg
+              p-8
+              md:p-12
             "
           >
-            {
-              notice.content
-            }
+
+            <div
+              className="
+                text-slate-700
+                leading-relaxed
+                whitespace-pre-line
+              "
+            >
+              {notice.content}
+            </div>
+
+            <div
+              className="
+                mt-10
+                pt-8
+                border-t
+              "
+            >
+
+              <Link
+                to="/notices"
+                className="
+                  bg-emerald-700
+                  hover:bg-emerald-800
+                  text-white
+                  px-8
+                  py-4
+                  rounded-xl
+                  inline-block
+                "
+              >
+                Back To Notices
+              </Link>
+
+            </div>
+
           </div>
+
         </div>
-      </section>
-    );
-  };
+
+      </Container>
+
+    </main>
+  );
+};
 
 export default NoticeDetailsPage;

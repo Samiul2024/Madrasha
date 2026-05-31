@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const NoticeCard = ({ notice }) => {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 hover:border-emerald-200 transition">
@@ -9,9 +11,11 @@ const NoticeCard = ({ notice }) => {
         {notice.title}
       </h3>
 
-      <button className="mt-5 text-emerald-700 font-semibold">
-        Read More ?
-      </button>
+      <Link
+        to={`/notices/${notice.slug}`}
+      >
+        Read More
+      </Link>
     </div>
   );
 };

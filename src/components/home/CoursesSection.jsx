@@ -19,7 +19,7 @@ const CoursesSection = ({
 
                 <SectionHeading
                     subtitle="Academic Programs"
-                    title="Featured Islamic Courses"
+                    title="Featured  Courses"
                     description="Comprehensive Islamic and modern education programs for students."
                 />
 

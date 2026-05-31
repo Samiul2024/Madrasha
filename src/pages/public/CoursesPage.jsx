@@ -67,7 +67,7 @@ const CoursesPage = () => {
 
         <SectionHeading
           subtitle="Programs"
-          title="Islamic Courses"
+          title=" Courses"
           description="Choose the program that best fits your learning journey."
         />
 
