@@ -53,6 +53,17 @@ const AppRouter = () => {
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="donation" element={<DonationPage />} />
         <Route path="contact" element={<ContactPage />} />
+
+        <Route
+          path="courses/:id"
+          element={<CourseDetailsPage />}
+        />
+
+        <Route
+          path="notices/:slug"
+          element={<NoticeDetailsPage />}
+        />
+
       </Route>
 
       {/* =========================
@@ -79,15 +90,7 @@ const AppRouter = () => {
         <Route path="notices" element={<NoticeManagementPage />} />
         <Route path="gallery" element={<GalleryManagementPage />} />
 
-        <Route
-          path="courses/:id"
-          element={<CourseDetailsPage />}
-        />
 
-        <Route
-          path="notices/:slug"
-          element={<NoticeDetailsPage />}
-        />
 
         {/* ADD MORE DASHBOARD ROUTES HERE */}
 
