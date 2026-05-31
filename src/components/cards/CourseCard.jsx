@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CourseCard = ({
   course,
 }) => {
@@ -57,6 +59,15 @@ const CourseCard = ({
       </div>
 
       <div className="mt-8 flex flex-col gap-3">
+
+        <Link
+          className="bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-xl text-center font-semibold transition"
+
+          to={`/courses/${course._id}`}
+        >
+          Course Details
+        </Link>
+
         <a
           href={course.noticeRoute || "/notices"}
           target="_blank"
@@ -66,12 +77,12 @@ const CourseCard = ({
           View Admission Notice
         </a>
 
-        <a
+        {/* <a
           href={`/courses/${course._id}`}
           className="bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-xl text-center font-semibold transition"
         >
           Apply Now
-        </a>
+        </a> */}
       </div>
     </div>
   );
