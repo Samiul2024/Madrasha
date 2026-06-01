@@ -172,8 +172,16 @@ const GalleryManagementPage =
           closeModal();
 
           fetchGallery();
-        } catch {
+        } catch (error) {
+
+          console.log(error);
+
+          console.log(
+            error.response?.data
+          );
+
           toast.error(
+            error.response?.data?.message ||
             "Operation failed"
           );
         }
