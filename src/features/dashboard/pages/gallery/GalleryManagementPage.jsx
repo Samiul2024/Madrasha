@@ -16,12 +16,18 @@ import {
 
 const initialForm = {
   title: "",
-  image: "",
   category: "",
 };
 
 const GalleryManagementPage =
   () => {
+
+    const [selectedFile, setSelectedFile] =
+      useState(null);
+
+    const [preview, setPreview] =
+      useState("");
+
     const [gallery, setGallery] =
       useState([]);
 
@@ -61,14 +67,20 @@ const GalleryManagementPage =
       fetchGallery();
     }, []);
 
-    const handleChange = (e) => {
-      setFormData({
-        ...formData,
+    const handleImageChange =
+      (e) => {
 
-        [e.target.name]:
-          e.target.value,
-      });
-    };
+        const file =
+          e.target.files[0];
+
+        if (!file) return;
+
+        setSelectedFile(file);
+
+        setPreview(
+          URL.createObjectURL(file)
+        );
+      };
 
     const openCreateModal =
       () => {
@@ -79,32 +91,32 @@ const GalleryManagementPage =
         setIsModalOpen(true);
       };
 
-    const openEditModal =
-      (item) => {
-        setEditingItem(item);
+    const openEditModal = (item) => {
+      setEditingItem(item);
 
-        setFormData({
-          title:
-            item.title || "",
+      setFormData({
+        title: item.title || "",
+        category: item.category || "",
+      });
 
-          image:
-            item.image || "",
+      setPreview(item.image || "");
 
-          category:
-            item.category || "",
-        });
+      setSelectedFile(null);
 
-        setIsModalOpen(true);
-      };
+      setIsModalOpen(true);
+    };
 
-    const closeModal =
-      () => {
-        setIsModalOpen(false);
+    const closeModal = () => {
+      setIsModalOpen(false);
 
-        setEditingItem(null);
+      setEditingItem(null);
 
-        setFormData(initialForm);
-      };
+      setFormData(initialForm);
+
+      setSelectedFile(null);
+
+      setPreview("");
+    };
 
     const handleSubmit =
       async (e) => {
@@ -123,9 +135,33 @@ const GalleryManagementPage =
               "Gallery updated"
             );
           } else {
+            const payload =
+              new FormData();
+
+            payload.append(
+              "title",
+              formData.title
+            );
+
+            payload.append(
+              "category",
+              formData.category
+            );
+
+            payload.append(
+              "image",
+              selectedFile
+            );
+
             await apiClient.post(
               "/gallery",
-              formData
+              payload,
+              {
+                headers: {
+                  "Content-Type":
+                    "multipart/form-data",
+                },
+              }
             );
 
             toast.success(
@@ -142,6 +178,13 @@ const GalleryManagementPage =
           );
         }
       };
+
+    const handleChange = (e) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    };
 
     const handleDelete =
       async (id) => {
@@ -422,22 +465,31 @@ const GalleryManagementPage =
                   "
                 />
 
-                <input
-                  type="text"
-                  name="image"
-                  placeholder="Image URL"
-                  value={
-                    formData.image
-                  }
-                  onChange={
-                    handleChange
-                  }
-                  className="
-                    border
-                    rounded-xl
-                    p-3
-                  "
-                />
+                <div>
+                  <label
+                    className="
+      block
+      mb-2
+      font-medium
+    "
+                  >
+                    Upload Image
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={
+                      handleImageChange
+                    }
+                    className="
+      w-full
+      border
+      rounded-xl
+      p-3
+    "
+                  />
+                </div>
 
                 <input
                   type="text"
@@ -456,11 +508,9 @@ const GalleryManagementPage =
                   "
                 />
 
-                {formData.image && (
+                {preview && (
                   <img
-                    src={
-                      formData.image
-                    }
+                    src={preview}
                     alt="Preview"
                     className="
                       w-full
