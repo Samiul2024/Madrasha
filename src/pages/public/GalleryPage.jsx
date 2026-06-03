@@ -16,6 +16,9 @@ const GalleryPage = () => {
   const [loading, setLoading] =
     useState(true);
 
+  const [selectedImage, setSelectedImage] =
+    useState(null);
+
   useEffect(() => {
     const fetchGallery =
       async () => {
@@ -36,6 +39,31 @@ const GalleryPage = () => {
     fetchGallery();
   }, []);
 
+  useEffect(() => {
+    const handleEsc = (
+      e
+    ) => {
+      if (
+        e.key === "Escape"
+      ) {
+        setSelectedImage(
+          null
+        );
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleEsc
+    );
+
+    return () =>
+      window.removeEventListener(
+        "keydown",
+        handleEsc
+      );
+  }, []);
+
   if (loading) {
     return (
       <div
@@ -52,130 +80,195 @@ const GalleryPage = () => {
   }
 
   return (
-    <section
-      className="
-        py-20
-        px-4
-      "
-    >
-      <div
+    <>
+      <section
         className="
-          max-w-7xl
-          mx-auto
+          py-20
+          px-4
         "
       >
         <div
           className="
-            text-center
-            mb-14
+            max-w-7xl
+            mx-auto
           "
         >
-          <h1
+          <div
             className="
-              text-4xl
-              md:text-5xl
-              font-bold
-              mb-4
+              text-center
+              mb-14
             "
           >
-            Madrasa Gallery
-          </h1>
+            <h1
+              className="
+                text-4xl
+                md:text-5xl
+                font-bold
+                mb-4
+              "
+            >
+              Madrasa Gallery
+            </h1>
 
-          <p
+            <p
+              className="
+                text-slate-500
+                max-w-2xl
+                mx-auto
+              "
+            >
+              Islamic programs,
+              student activities,
+              and memorable moments
+              from Darul Iman
+              Islamiyah.
+            </p>
+          </div>
+
+          <div
             className="
-              text-slate-500
-              max-w-2xl
-              mx-auto
+              grid
+              grid-cols-1
+              sm:grid-cols-2
+              lg:grid-cols-3
+              gap-6
             "
           >
-            Islamic programs,
-            student activities,
-            and memorable moments
-            from Darul Iman
-            Islamiyah.
-          </p>
-        </div>
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            gap-6
-          "
-        >
-          {gallery.map(
-            (item) => (
-              <div
-                key={
-                  item._id
-                }
-                className="
-                  group
-                  bg-white
-                  rounded-3xl
-                  overflow-hidden
-                  shadow-sm
-                  border
-                "
-              >
+            {gallery.map(
+              (item) => (
                 <div
+                  key={
+                    item._id
+                  }
+                  onClick={() =>
+                    setSelectedImage(
+                      item
+                    )
+                  }
                   className="
+                    group
+                    bg-white
+                    rounded-3xl
                     overflow-hidden
+                    shadow-sm
+                    border
+                    cursor-pointer
                   "
                 >
-                  <img
-                    src={
-                      item.image
-                    }
-                    alt={
-                      item.title
-                    }
+                  <div
                     className="
-                      w-full
-                      h-72
-                      object-cover
-                      transition
-                      duration-500
-                      group-hover:scale-105
-                    "
-                  />
-                </div>
-
-                <div
-                  className="
-                    p-5
-                  "
-                >
-                  <h2
-                    className="
-                      text-xl
-                      font-semibold
+                      overflow-hidden
                     "
                   >
-                    {
-                      item.title
-                    }
-                  </h2>
+                    <img
+                      src={
+                        item.image
+                      }
+                      alt={
+                        item.title
+                      }
+                      className="
+                        w-full
+                        h-72
+                        object-cover
+                        transition
+                        duration-500
+                        group-hover:scale-105
+                      "
+                    />
+                  </div>
 
-                  <p
+                  <div
                     className="
-                      text-slate-500
-                      mt-2
+                      p-5
                     "
                   >
-                    {
-                      item.category
-                    }
-                  </p>
+                    <h2
+                      className="
+                        text-xl
+                        font-semibold
+                      "
+                    >
+                      {
+                        item.title
+                      }
+                    </h2>
+
+                    <p
+                      className="
+                        text-slate-500
+                        mt-2
+                      "
+                    >
+                      {
+                        item.category
+                      }
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {selectedImage && (
+        <div
+          onClick={() =>
+            setSelectedImage(
+              null
+            )
+          }
+          className="
+            fixed
+            inset-0
+            bg-black/90
+            z-[9999]
+            flex
+            items-center
+            justify-center
+            p-4
+          "
+        >
+          <button
+            onClick={() =>
+              setSelectedImage(
+                null
+              )
+            }
+            className="
+              absolute
+              top-5
+              right-5
+              text-white
+              text-5xl
+              font-bold
+              leading-none
+            "
+          >
+            ×
+          </button>
+
+          <img
+            src={
+              selectedImage.image
+            }
+            alt={
+              selectedImage.title
+            }
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+            className="
+              max-w-full
+              max-h-[90vh]
+              object-contain
+              rounded-2xl
+            "
+          />
+        </div>
+      )}
+    </>
   );
 };
 
