@@ -78,21 +78,7 @@ const HomePage = () => {
 
     }, []);
 
-    if (loading) {
 
-        return (
-            <div
-                className="
-                    min-h-screen
-                    flex
-                    items-center
-                    justify-center
-                "
-            >
-                <PageLoader />
-            </div>
-        );
-    }
 
     return (
         <>
@@ -108,10 +94,12 @@ const HomePage = () => {
 
             <CoursesSection
                 courses={courses}
+                loading={loading}
             />
 
             <NoticeSection
                 notices={notices}
+                loading={loading}
             />
 
             <GalleryPreview />
