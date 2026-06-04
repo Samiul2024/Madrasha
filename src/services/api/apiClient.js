@@ -4,6 +4,7 @@ const apiClient =
   axios.create({
     baseURL:
       "https://madrasha-backend.onrender.com/api",
+    timeout: 10000,
   });
 
 apiClient.interceptors.request.use(
