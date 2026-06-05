@@ -48,6 +48,15 @@ const HomePage = () => {
             1000 * 60 * 2, // 2 min
     });
 
+
+    useEffect(() => {
+
+        fetch(
+            "https://madrasha-backend.onrender.com"
+        ).catch(() => { });
+
+    }, []);
+
     useEffect(() => {
 
         if (
