@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import SEO from "../../seo/SEO";
@@ -11,7 +11,6 @@ import NoticeSection from "../../components/home/NoticeSection";
 import DonationSection from "../../components/home/DonationSection";
 import TestimonialSection from "../../components/home/TestimonialSection";
 import GalleryPreview from "../../components/home/GalleryPreview";
-import PageLoader from "../../components/ui/skeletons/PageLoader";
 
 import {
     getCourses,
@@ -23,62 +22,53 @@ import {
 
 const HomePage = () => {
 
-    const [courses, setCourses] =
-        useState([]);
+    const {
+        data: courses = [],
+        isLoading: coursesLoading,
+        error: coursesError,
+    } = useQuery({
+        queryKey: ["courses"],
+        queryFn: getCourses,
+        select: (data) =>
+            data.slice(0, 3),
+        staleTime:
+            1000 * 60 * 5, // 5 min
+    });
 
-    const [notices, setNotices] =
-        useState([]);
-
-    const [loading, setLoading] =
-        useState(true);
+    const {
+        data: notices = [],
+        isLoading: noticesLoading,
+        error: noticesError,
+    } = useQuery({
+        queryKey: ["notices"],
+        queryFn: getNotices,
+        select: (data) =>
+            data.slice(0, 4),
+        staleTime:
+            1000 * 60 * 2, // 2 min
+    });
 
     useEffect(() => {
 
-        const fetchHomeData =
-            async () => {
+        if (
+            coursesError ||
+            noticesError
+        ) {
 
-                try {
+            toast.error(
+                "Failed to load homepage"
+            );
 
-                    const [
-                        courseData,
-                        noticeData,
-                    ] = await Promise.all([
-                        getCourses(),
-                        getNotices(),
-                    ]);
+        }
 
-                    setCourses(
-                        courseData.slice(
-                            0,
-                            3
-                        )
-                    );
+    }, [
+        coursesError,
+        noticesError,
+    ]);
 
-                    setNotices(
-                        noticeData.slice(
-                            0,
-                            4
-                        )
-                    );
-
-                } catch (error) {
-
-                    toast.error(
-                        "Failed to load homepage"
-                    );
-
-                } finally {
-
-                    setLoading(false);
-
-                }
-            };
-
-        fetchHomeData();
-
-    }, []);
-
-
+    const loading =
+        coursesLoading ||
+        noticesLoading;
 
     return (
         <>
